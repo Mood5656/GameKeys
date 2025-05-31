@@ -8,6 +8,8 @@ const { data: Games } = await useFetch("https://6741ccdfe4647499008ecf09.mockapi
 })
 
 const { addToCart } = useCart()
+
+console.log(data)
 </script>
 
 <template>
