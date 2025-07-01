@@ -43,8 +43,8 @@ onBeforeUnmount(() => {
         <div class="flex items-center">
             <input v-model="searchQuery" @input="handleSearch" @focus="showResults = true" type="text"
                 placeholder="Поиск игр..." class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 ease-in-out hover:border-indigo-300
-                sm:text-sm md:text-base
-                md:w-64 lg:w-80 xl:w-96">
+                text-sm
+                xs:w-40 sm:w-48 md:w-64 lg:w-80 xl:w-96">
             <button
                 class="ml-2 p-2 text-gray-500 hover:text-indigo-600 transition-colors duration-200 ease-in-out transform hover:scale-110">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,18 +58,16 @@ onBeforeUnmount(() => {
             leave-active-class="transition-all duration-150 ease-in" enter-from-class="opacity-0 scale-95"
             enter-to-class="opacity-100 scale-100" leave-from-class="opacity-100 scale-100"
             leave-to-class="opacity-0 scale-95">
-            <div v-if="showResults && searchResults.length > 0" class="absolute z-50 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto transform origin-top
-                sm:max-h-80 md:max-h-96">
+            <div v-if="showResults && searchResults.length > 0" class="absolute z-50 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-60 overflow-y-auto transform origin-top
+                xs:right-0 xs:w-48 sm:w-64 md:w-full md:max-h-96" @click.away="closeSearch">
                 <NuxtLink v-for="game in searchResults" :key="game.id" :to="`${game.id}`" @click="closeSearch"
-                    class="flex items-center p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors duration-150 ease-in-out hover:translate-x-1">
-                    <img :src="game.image" :alt="game.title"
-                        class="w-10 h-10 object-cover rounded mr-3 transition-transform duration-200 hover:scale-110">
+                    class="flex items-center p-2 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors duration-150 ease-in-out">
+                    <img :src="game.image" :alt="game.title" class="w-8 h-8 object-cover rounded mr-2">
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-medium text-gray-900 truncate text-sm md:text-base">{{ game.Title }}</h3>
-                        <p class="text-xs md:text-sm text-gray-500 truncate">{{ game.platform }}</p>
+                        <h3 class="font-medium text-gray-900 truncate text-xs sm:text-sm">{{ game.Title }}</h3>
+                        <p class="text-xs text-gray-500 truncate">{{ game.platform }}</p>
                     </div>
-                    <div
-                        class="ml-2 font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-800 whitespace-nowrap text-sm md:text-base">
+                    <div class="ml-1 font-medium text-indigo-600 whitespace-nowrap text-xs sm:text-sm">
                         {{ game.price.toLocaleString('ru-RU') }} ₽
                     </div>
                 </NuxtLink>
@@ -80,8 +78,9 @@ onBeforeUnmount(() => {
             leave-active-class="transition-all duration-150 ease-in" enter-from-class="opacity-0 scale-95"
             enter-to-class="opacity-100 scale-100" leave-from-class="opacity-100 scale-100"
             leave-to-class="opacity-0 scale-95">
-            <div v-if="showResults && searchQuery && searchResults.length === 0" class="absolute z-50 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 p-4 text-gray-500 transform origin-top
-                text-sm md:text-base">
+            <div v-if="showResults && searchQuery && searchResults.length === 0" class="absolute z-50 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 p-3 text-gray-500 transform origin-top
+                text-xs sm:text-sm
+                xs:right-0 xs:w-48 sm:w-64 md:w-full">
                 Игры по запросу "{{ searchQuery }}" не найдены
             </div>
         </transition>
